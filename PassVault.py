@@ -1,7 +1,6 @@
 from os import path
 from sys import exit
 from time import sleep
-import csv
 
 
 class cipher():
