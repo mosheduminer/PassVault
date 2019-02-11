@@ -12,9 +12,10 @@ class cipher():
         if lc == 0:
             self.valid = "no"
         else:
+            self.valid = "yes"
             for i in range(lc):
                 if 31 < ord(c[i]) < 127:
-                    self.valid = "yes"
+                    pass
                 else:
                     self.valid = "no"
                     break
@@ -57,6 +58,12 @@ def read_file(location, c):
         text_val = text_val % 95 + 31
         text_char = chr(text_val)
         text = f"{text}{text_char}"
+    # sort accounts alphabetically
+    text_list = text.split(",")
+    text_list.sort()
+    text = ""
+    for index, item in enumerate(text_list):
+        text = f"{text}{item} "
     return text
 
 
@@ -109,5 +116,8 @@ while True:
                         "Otherwise, enter what account"
                         " you wish to enter a password for: ")
         password = input("Enter password: ")
-        unciphered = f"{unciphered}{account}: {password},"
+        if len(unciphered) > 0:
+            unciphered = f"{unciphered}{account}:{password},"
+        else:
+            unciphered = f"{account}:{password} "
         add_to_file(unciphered, c)
